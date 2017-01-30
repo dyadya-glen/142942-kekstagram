@@ -5,7 +5,7 @@ var fieldUploadFile = formUploadImage.querySelector('#upload-file');
 var formUploadOverlay = document.querySelector('.upload-overlay');
 var formClose = document.querySelector('.upload-form-cancel');
 
-var filters = document.querySelectorAll("[name=upload-filter]");
+var filters = document.querySelectorAll('[name=upload-filter]');
 var imagePreview = document.querySelector('.filter-image-preview');
 
 var buttonDecreaseSize = document.querySelector('.upload-resize-controls-button-dec');
@@ -35,7 +35,7 @@ formClose.addEventListener('click', function () {
 // Применим фильтры к изображению
 for (var i = 0; i < filters.length; i++) {
   filters[i].addEventListener('change', function () {
-    var className = this.id.replace('upload-', '');
+    var className = event.target.id.replace('upload-', '');
 
     for (var k = 0; k < imagePreview.classList.length; k++) {
       if (imagePreview.classList[k].startsWith('filter-')) {
@@ -45,27 +45,23 @@ for (var i = 0; i < filters.length; i++) {
 
     imagePreview.classList.add(className);
   });
-};
+}
 
 // Изменим масштаб изображения
 buttonDecreaseSize.addEventListener('click', function () {
-  var value = parseInt(fieldValueOfSize.value) - 25;
+  var value = parseInt(fieldValueOfSize.value, 10) - 25;
   if (value < 25) {
     value = 25;
   }
   fieldValueOfSize.value = value + '%';
-  imagePreview.style = 'transform: scale(' + value/100 + ')';
+  imagePreview.style = 'transform: scale(' + value / 100 + ')';
 });
 
 buttonIncreaseSize.addEventListener('click', function () {
-  var value = parseInt(fieldValueOfSize.value) + 25;
+  var value = parseInt(fieldValueOfSize.value, 10) + 25;
   if (value > 100) {
     value = 100;
   }
   fieldValueOfSize.value = value + '%';
-  imagePreview.style = 'transform: scale(' + value/100 + ')';
+  imagePreview.style = 'transform: scale(' + value / 100 + ')';
 });
-
-
-
-
